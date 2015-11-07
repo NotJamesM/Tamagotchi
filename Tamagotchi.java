@@ -22,6 +22,8 @@ public class Tamagotchi {
 	}
 	
 	private void menu(){
+		System.out.println("\nWhat to do with " + name);
+		System.out.print("1 - Play\n2 - Put to bed\n3 - Feed\n");
 		int option = sc.nextInt();
 		switch(option){
 		case 1:	play();
@@ -31,34 +33,35 @@ public class Tamagotchi {
 	}
 	
 	private void play(){
-		System.out.println("You play with " + name);
-		if(playNeed < 200) playNeed += 800;
+		System.out.println("\nYou play with " + name);
+		if(playNeed < 800) playNeed += 475;
 		else playNeed = PLAY_CAP;
 		nextTurn();
 	}
 	
 	private void sleep(){
-		System.out.println("You put " + name + "to sleep");
-		if(sleepNeed < 200) sleepNeed += 800;
-		else sleepNeed = SLEEP_CAP;
+		System.out.println("\nYou put " + name + "to sleep");
+		sleepNeed = SLEEP_CAP;
 		nextTurn();
 	}
 	
 	private void feed(){
-		System.out.println("You feed " + name);
-		if(hungerNeed < 200) hungerNeed += 800;
+		System.out.println("\nYou feed " + name);
+		if(hungerNeed < 800) hungerNeed += 500;
 		else hungerNeed = HUNGER_CAP;
 		nextTurn();
 	}
 	
 	private void nextTurn(){
-		sleepNeed -= 100;
-		playNeed -= 150;
-		hungerNeed -= 200;
-		System.out.println("Current Stats (low is bad, high is good):");
-		System.out.println("Hunger: " + hungerNeed);
-		System.out.println("Sleep" + sleepNeed);
-		System.out.println("Fun need: " + playNeed);
+		sleepNeed -= 50;
+		playNeed -= 200;
+		hungerNeed -= 175;
+		printStats();
 		menu();
 	}
+	
+	private void printStats(){
+		System.out.println("Stats:\nHunger: " + hungerNeed + "\n Sleep: "+sleepNeed +"\nFun: " + playNeed);
+	}
+	
 }
