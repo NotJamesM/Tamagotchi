@@ -24,14 +24,13 @@ public class Tamagotchi {
 	}
 	
 	private void menu(){
-		if(isAlive == false) ;
-		System.out.println("\nWhat to do with " + name);
-		System.out.print("1 - Play\n2 - Put to bed\n3 - Feed\n");
-		int option = sc.nextInt();
-		switch(option){
-		case 1:	play();
-		case 2: sleep();
-		case 3: feed();
+		while(isAlive){
+			System.out.println("\nWhat to do with " + name);
+			System.out.print("1 - Play\n2 - Put to bed\n3 - Feed\n");
+			int option = sc.nextInt();
+			if(option == 1) play();
+			else if(option == 2) sleep();
+			else if(option == 3) feed();
 		}
 	}
 	
@@ -43,7 +42,7 @@ public class Tamagotchi {
 	}
 	
 	private void sleep(){
-		System.out.println("\nYou put " + name + "to sleep");
+		System.out.println("\nYou put " + name + " to sleep");
 		sleepNeed = SLEEP_CAP;
 		nextTurn();
 	}
@@ -60,13 +59,18 @@ public class Tamagotchi {
 		playNeed -= 200;
 		hungerNeed -= 175;
 		if(sleepNeed < 1) die("sleep.");
-		if(hungerNeed < 1) die("food.");
-		printStats();
-		menu();
+		else if(hungerNeed < 1) die("food.");
+		else if(isAlive){
+			printStats();
+			menu();
+		}else{
+			System.out.println("Game over!");			
+		}
+		
 	}
 	
 	private void printStats(){
-		System.out.println("Stats:\nHunger: " + hungerNeed + "\nSleep: "+sleepNeed +"\nFun: " + playNeed);
+		System.out.println("\nStats:\nHunger: " + hungerNeed + "\nSleep: "+sleepNeed +"\nFun: " + playNeed);
 	}
 	
 	private void die(String deathCause){
