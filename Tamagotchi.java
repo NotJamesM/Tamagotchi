@@ -21,10 +21,18 @@ public class Tamagotchi {
 	
 	public void play(){
 		System.out.println("You play with " + name);
-		playNeed += 100;
+		if(sleepNeed < 200) sleepNeed += 800;
+		else sleepNeed = SLEEP_CAP;
+		nextTurn();
 	}
 	
 	public void sleep(){
 		System.out.println("You put " + name + "to sleep");
+		if(sleepNeed < 200) sleepNeed += 800;
+		else sleepNeed = SLEEP_CAP;
+	}
+	
+	private void nextTurn(){
+		
 	}
 }
