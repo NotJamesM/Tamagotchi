@@ -11,17 +11,20 @@ public class Tamagotchi {
 	private Scanner sc;
 	
 	private String name;
+	private boolean isAlive;
 	private int hungerNeed = 500;
 	private int playNeed = 500;
 	private int sleepNeed = 500;
 
 	public Tamagotchi(String name){
 		this.name = name;
+		isAlive = true;
 		sc = new Scanner(System.in);
 		menu();
 	}
 	
 	private void menu(){
+		if(isAlive == false) ;
 		System.out.println("\nWhat to do with " + name);
 		System.out.print("1 - Play\n2 - Put to bed\n3 - Feed\n");
 		int option = sc.nextInt();
@@ -56,12 +59,18 @@ public class Tamagotchi {
 		sleepNeed -= 50;
 		playNeed -= 200;
 		hungerNeed -= 175;
+		if(sleepNeed < 1) die("sleep.");
+		if(hungerNeed < 1) die("food.");
 		printStats();
 		menu();
 	}
 	
 	private void printStats(){
-		System.out.println("Stats:\nHunger: " + hungerNeed + "\n Sleep: "+sleepNeed +"\nFun: " + playNeed);
+		System.out.println("Stats:\nHunger: " + hungerNeed + "\nSleep: "+sleepNeed +"\nFun: " + playNeed);
 	}
 	
+	private void die(String deathCause){
+		System.out.println(name + " has died due to lack of " + deathCause);
+		isAlive = false;
+	}
 }
